@@ -1,107 +1,218 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<style type="text/css">
-			#imgwrap{width: 880px;height: 440px;margin: 50px auto;perspective: 880px;}
-			#imgwrap img{width:88px;height:88px;float: left;}
-			#btn{width: 100px;text-align: center;font: 16px/40px "微软雅黑";color: white;padding: 0 20px;
-			margin:0 auto;border-radius:5px;background: rgb(0,100,0);box-shadow: 2px 2px 5px rgba(0,0,0,0.5);cursor: pointer;}
-			/*box-shadow(阴影): 2px(x) 2px(y) 5px(大小) rgba(0,0,0,0.5);*/
-		</style>
-		<script type="text/javascript">
-			/*
-			 * 运动的步骤
-			 * 1：闪的效果（瞬间宽高都变为0，css3属性scal：缩小，随机）
-			 * 2：图片从小变到大，同时透明度从1变到0（必须是上一步效果走完了他才会走）
-			 * 3：图片旋转，同时透明度从0变到1 有层次感（位移translate）（当所有图片的透明度变为0的时候，才会走这一步）
-			 */
-			window.onload=function(){
-				var btn=document.getElementById('btn');
-				var imgs=document.querySelectorAll('img');
-				var on=true;		//这个变量决定用户是否可以再次点击(true代表可以点，false代表不可以点)
-//				给btn添加点击事件
-				btn.onclick=function(){
-					if(!on){
-						return;
-					}
-					on=false;
-					var endNum=0;		//运动完成的图片数量
-					var allEnd=0;		//用来判断所有的图片是否都运动完了
-					for(var i=0;i<imgs.length;i++){
-						(function(i){
-							setTimeout(function(){
-								montion(imgs[i],'10ms',function(){
-									this.style.transform="scale(0)";	//缩放到0
-								},function(){
-									//第二个运动要在这里写
-									montion(this,'1s',function(){
-										this.style.transform="scale(1)";
-										this.style.opacity=0;
-									},function(){
-										endNum++;	//只要有一张图走完了，就让他加个1
-										if(endNum==imgs.length){
-											toBig();
-										}
-									});
-								});
-							},Math.random()*1000);				//500毫秒
-						})(i)
-					}
-					function toBig(){
-//						这个函数用来做第三个效果
-						/*
-						 * 坐标轴
-						 * x轴（平行地面）
-						 * y轴（垂直地面）
-						 * x轴（垂直屏幕）
-						 */
-						for(var i=0;i<imgs.length;i++){
-							imgs[i].style.transition="";	
-							//想要一个物体有css3中的一些变化，那就需要给他一个初始值
-							imgs[i].style.transform='rotateY(0deg)translateZ(-'+Math.random()*500+'px)';
-							//用这种方式去写是因为想要在循环里找i的值
-							(function(i){
-								setTimeout(function(){
-									montion(imgs[i],'2s',function(){
-										this.style.opacity=1;
-										this.style.transform='rotateY(-360deg) translateZ(0)';
-									},function(){
-										allEnd++;
-										if(allEnd==imgs.length){
-											//这个条件成立，说明所有图片都运动完了，可以让用户再次点击了
-											on=true;		//当所有运动完了以后才可以点
-										}
-									});
-								},Math.random()*1000);
-							})(i);
-						}
-					};
-				};
-//						运动函数(运动的对象/运动的时间/运动的属性函数/运动完成后要做的事情)
-						function montion(obj,time,doFn,callBack){
-							obj.style.transition=time;
-							doFn.call(obj);		//调用函数,并把this的指向给obj
-							var called=false;	//解决transitionend调用多次的bug
-							obj.addEventListener('transitionend',function(){
-								if(!called){	
-									callBack&&callBack.call(obj);
-									called=true;
-								}
-							},false);
-						}
-			};
-		</script>
-	</head>
-	<body>
-		<div id="imgwrap">
-			<img src="img/1.png" alt="" />
-			<img src="img/2.png" alt="" />
-			<img src="img/3.png" alt="" />
-		</div>
-		<div id="btn">
-			点击查看效果
-		</div>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旋转的照片墙</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body, html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            position: relative;
+        }
+        #container{
+            width: 100%;
+            height: 100%;
+            background-image: url(img/bg.jpg);
+        }
+        #container .img{
+            width: 125px;
+            height: 125px;
+            border: 5px solid #fff;
+            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: -500px;
+            left: -500px;
+            transition: all 1s ease;
+            cursor: pointer;
+        }
+        #container span{
+            display: block;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        #next, #prev{
+            width: 60px;
+            height: 60px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            margin-top: -30px;
+            display: none;
+            cursor: pointer;
+        }
+        #prev{
+            background-image: url(img/prev.png);
+            left: 0;
+            border-radius: 0 8px 8px 0;
+        }
+        #next{
+            background-image: url(img/next.png);
+            right: 0;
+            border-radius: 8px 0 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="prev"></div>
+    <div id="next"></div>
+
+    <script>
+        var ROW = 4, COL = 6, NUM = ROW * COL,
+            THUMB_WIDTH = 125, THUMB_HEIGHT = 125,
+            BIG_WIDTH = 750, BIG_HEIGHT = 500;
+        var count = 0;
+        var oContainer = document.getElementById("container");
+        var oPrev = document.getElementById("prev");
+        var oNext = document.getElementById("next");
+        var aImg;
+        var nowIndex = 1;//保存的当前显示的图片，取值1~24
+
+        //图片预加载
+        for(var i=0; i<NUM; i++){
+            //预加载小图
+            var oThumbImg = new Image();
+            oThumbImg.onload = function(){
+                count++;
+                if(count == NUM * 2){
+                    loadSuccess();
+                }
+            };
+            oThumbImg.src = "img/thumbs/"+ (i + 1) +".jpg";
+
+            //预加载大图
+            var oBigImg = new Image();
+            oBigImg.onload = function(){
+                count++;
+                if(count == NUM * 2){
+                    loadSuccess();
+                }
+            };
+            oBigImg.src = "img/"+ (i + 1) +".jpg";
+        }
+
+        var index = 0;
+        var oImgWidth;
+        var oImgHeight;
+        var fColGap;
+        var fRorGap;
+        function loadSuccess(){
+            //创建24个div，背景图是小的缩略图
+            for(var i=0; i<ROW; i++){
+                for(var j=0; j<COL; j++){
+                    index++;
+                    var oDiv = document.createElement("div");
+                    oDiv.style.backgroundImage = "url(img/thumbs/"+ index +".jpg)";
+                    oDiv.className = "img";
+                    oDiv.innerHTML = "<span></span>";
+                    //自定义属性是个对象，存储当前的位置
+                    oDiv.pos = {
+                        col : j,
+                        row : i
+                    };
+                    oDiv.index = index;//保存图片名称
+                    oContainer.appendChild(oDiv);
+                }
+            }
+
+            //计算空隙的大小
+            aImg = document.getElementsByClassName("img");//24个div
+            oImgWidth = aImg[0].offsetWidth;
+            oImgHeight = aImg[0].offsetHeight;
+            fColGap = (oContainer.offsetWidth -  oImgWidth * COL) / (COL + 1);
+            fRorGap = (oContainer.offsetHeight - oImgHeight * ROW) / (ROW + 1);
+            for(var i=23; i >= 0; i--){
+                aImg[i].style.transitionDelay = (NUM - i) * 100 + "ms";
+                aImg[i].style.top = (fRorGap + oImgHeight) * aImg[i].pos.row + fRorGap + "px";
+                aImg[i].style.left = (fColGap + oImgWidth) * aImg[i].pos.col + fColGap + "px";
+                aImg[i].style.transform = "rotate("+ (Math.random() * 40 - 20) +"deg)";
+            }
+        }
+
+        var fBigRowGap = (oContainer.offsetHeight - BIG_HEIGHT) / 2;
+        var fBigColGap = (oContainer.offsetWidth - BIG_WIDTH) / 2;
+        var bFlag = true;//标志位，true表示当前是散开的要合上，false表示当前是合上的要散开
+        //把小图片的点击事件委托给container绑定
+        oContainer.onclick = function(e){
+            if(this === e.target){//e.target = oContainer/div/span
+                return false;
+            }
+            if(bFlag){
+                for(var i=0; i<aImg.length; i++){
+                    aImg[i].style.transitionDelay = "0ms";
+                    aImg[i].style.top = fBigRowGap + THUMB_HEIGHT * aImg[i].pos.row + "px";
+                    aImg[i].style.left = fBigColGap + THUMB_WIDTH * aImg[i].pos.col + "px";
+                    aImg[i].style.transform = "rotate(0)";
+                    aImg[i].style.borderWidth = "1px";
+
+                    var oSpan = aImg[i].getElementsByTagName("span")[0];
+                    oSpan.style.opacity = 1;
+                    var imgURL;
+                    if(e.target.className == "img"){//div
+                        imgURL = e.target.index;
+                    }else{//span
+                        imgURL = e.target.parentNode.index;
+                    }
+                    oSpan.style.backgroundImage = "url(img/"+ imgURL +".jpg)";
+                    oSpan.style.backgroundPosition = -THUMB_WIDTH * aImg[i].pos.col + "px "+ (-THUMB_HEIGHT * aImg[i].pos.row) +"px";
+                    oSpan.style.transitionDelay = "0ms";
+
+                    nowIndex = imgURL;// 取值1~24
+                }
+                oPrev.style.display = oNext.style.display = "block";
+            }else{
+                for(var i=0; i<NUM; i++){
+                    aImg[i].style.top = (fRorGap + oImgHeight) * aImg[i].pos.row + fRorGap + "px";
+                    aImg[i].style.left = (fColGap + oImgWidth) * aImg[i].pos.col + fColGap + "px";
+                    aImg[i].style.transform = "rotate("+ (Math.random() * 40 - 20) +"deg)";
+//                    aImg[i].style.backgroundImage = "url(img/thumbs/"+ (i + 1) +".jpg)";
+                    aImg[i].style.borderWidth = "5px";
+                    var oSpan = aImg[i].getElementsByTagName("span")[0];
+                    oSpan.style.opacity = 0;
+                    oSpan.style.transitionDelay = "0ms";
+                }
+                oPrev.style.display = oNext.style.display = "none";
+            }
+            bFlag = !bFlag;
+        };
+
+        oPrev.onclick = oNext.onclick = function(){
+            if(this === oNext){
+                nowIndex++;
+                if(nowIndex == NUM + 1){
+                    nowIndex = 1;
+                }
+            }else{
+                nowIndex--;
+                if(nowIndex == 0){
+                    nowIndex = NUM;
+                }
+            }
+
+            var arr = [];//0~23
+            for(var i=0; i<NUM; i++){
+                arr.push(i);
+            }
+            arr.sort(function(a, b){
+                return Math.random() - 0.5;
+            });
+
+            for(var i=0; i<arr.length; i++){
+                var oSpan = aImg[arr[i]].getElementsByTagName("span")[0];
+                oSpan.style.transitionDelay = (i + 1) * 50 + "ms";
+                oSpan.style.backgroundImage = "url(img/"+ nowIndex +".jpg)";
+            }
+        };
+    </script>
+</body>
 </html>

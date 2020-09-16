@@ -40,7 +40,7 @@ function PhotoPile(options){
         showInfo:           true,       // include photo description (alt tag) in photo container
 
         // Autoplay
-        autoplayGallery:    false,       // autoplay the photopile
+        autoplayGallery:    true,       // autoplay the photopile
         autoplaySpeed:      5000,        // ms
 
         // Images

@@ -1,107 +1,222 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>diaodiao健</title>
-	</head>
-	<style type="text/css">
-		*{
-			margin:0;
-			padding: 0;
-		}
-		/*html,*/body{
-			height: 100%;
-			background: url(bg.jpg) no-repeat;
-		}
-		#box{
-			background: url(pic.png) no-repeat;
-			width:300px;
-			height:200px;
-			margin:180px auto;
-			transform-style:preserve-3d ;/*子元素旋转父元素加上   为子元素声明3D空间*/
-			position: relative;
-			transform-origin: center;/*设置旋转中心点*/
-			animation: move 14s linear infinite;
-		}
-		#box img {
-			position: absolute;
-			width: 250px;
-			height: 300px;
-			
-		}
-		@keyframes move{
-			0%{transform: rotateY(0deg) rotateX(0deg) ;}
-			25%{transform: rotateY(180deg) rotateX(20deg) ;}
-			50%{transform: rotateY(360deg) rotateX(0deg) ;}
-			75%{transform: rotateY(540deg) rotateX(-20deg) ;}
-			100%{transform: rotateY(720deg) rotateX(0deg) ;}
-		}
-		/*#box img:nth-child(1){
-			transform: rotateY(360deg);
-		}*/
-	</style>
-	<body>
-		<div id="box">
-			<img src="img/1.jpg"/>
-			<img src="img/2.jpg"/>
-			<img src="img/3.jpg"/>
-			<img src="img/4.jpg"/>
-			<img src="img/5.jpg"/>
-			<img src="img/6.jpg"/>
-			<img src="img/7.jpg"/>
-			<img src="img/8.jpg"/>
-			<img src="img/9.jpg"/>
-			<img src="img/10.jpg"/>
-			<img src="img/11.jpg"/>
-			<img src="img/12.jpg"/>
-			<img src="img/13.jpg"/>
-			<img src="img/14.jpg"/>
-			<img src="img/15.jpg"/>
-			<img src="img/16.jpg"/>
-			<img src="img/17.jpg"/>
-			<img src="img/18.jpg"/>
-			<img src="img/19.jpg"/>
-			<img src="img/20.jpg"/>
-			<img src="img/21.jpg"/>
-			<img src="img/22.jpg"/>
-			<img src="img/23.jpg"/>
-			<img src="img/24.jpg"/>
-			<img src="img/25.jpg"/>
-			<img src="img/26.jpg"/>
-			<img src="img/27.jpg"/>
-			<img src="img/28.jpg"/>
-			<img src="img/29.jpg"/>
-			<img src="img/30.jpg"/>
-			<img src="img/31.jpg"/>
-			<img src="img/32.jpg"/>
-			<img src="img/33.jpg"/>
-			<img src="img/34.jpg"/>
-			<img src="img/35.jpg"/>
-			<img src="img/36.jpg"/>
-			<img src="img/37.jpg"/>
-			<img src="img/38.jpg"/>
-			<img src="img/39.jpg"/>
-			<img src="img/40.jpg"/>
-			<img src="img/41.jpg"/>
-			<img src="img/42.jpg"/>
-			<img src="img/43.jpg"/>
-			<img src="img/44.jpg"/>
-			<img src="img/45.jpg"/>
-			<img src="img/46.jpg"/>
-			<img src="img/47.jpg"/>
-			<img src="img/48.jpg"/>
-			<img src="img/49.jpg"/>
-			<img src="img/50.jpg"/>
-			<img src="img/51.jpg"/>
-			
-			
-		</div>
-		<embed src="sss.mp3" width="0px" height="0px" type="audio/mpeg" loop="true" autostart="true">		
-	</body>
-	<script type="text/javascript">
-		var oimg=box.getElementsByTagName("img");
-		for(var i=0;i<oimg.length;i++){
-			oimg[i].style.cssText="transform:rotateY("+i*36+"deg) translateZ(500px)";
-		}
-		</script>
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>质量月摄影展</title>
+
+<link rel="stylesheet" type="text/css" href="css/normalize.css" /><!--CSS RESET-->
+<link rel="stylesheet" type="text/css" href="css/base.css"><!--演示页面样式，使用时可以不引用-->
+
+<!--必要样式-->
+<link href="css/photopile.css" rel="stylesheet">
+<link href="css/demo.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="photopile-wrapper">
+	<ul class="photopile">
+		<li>
+			<a href="images/fullsize/01.jpg">
+			<img src="images/thumbs/01.jpg" alt="1" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/02.jpg">
+			<img src="images/thumbs/02.jpg" alt="2" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/03.jpg">
+			<img src="images/thumbs/03.jpg" alt="3" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/04.jpg">
+			<img src="images/thumbs/04.jpg" alt="4" width="100" height="133" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/05.jpg">
+			<img src="images/thumbs/05.jpg" alt="5" width="100" height="134" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/06.jpg">
+			<img src="images/thumbs/06.jpg" alt="6" width="100" height="137" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/07.jpg">
+			<img src="images/thumbs/07.jpg" alt="7" width="120" height="120" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/08.jpg">
+			<img src="images/thumbs/08.jpg" alt="8" width="140" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/09.jpg">
+			<img src="images/thumbs/09.jpg" alt="9" width="100" height="133" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/10.jpg">
+			<img src="images/thumbs/10.jpg" alt="10" width="135" height="128" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/11.jpg">
+			<img src="images/thumbs/11.jpg" alt="11" width="119" height="133" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/12.jpg">
+			<img src="images/thumbs/12.jpg" alt="12" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/13.jpg">
+			<img src="images/thumbs/13.jpg" alt="13" width="130" height="130" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/14.jpg">
+			<img src="images/thumbs/14.jpg" alt="Mackinac Island, Michigan" width="111" height="130" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/15.jpg">
+			<img src="images/thumbs/15.jpg" alt="Summer flowers" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/16.jpg">
+			<img src="images/thumbs/16.jpg" alt="Full of hot air" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/17.jpg">
+			<img src="images/thumbs/17.jpg" alt="On the rise" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/18.jpg">
+			<img src="images/thumbs/18.jpg" alt="Amador Causeway, Panama City" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/19.jpg">
+			<img src="images/thumbs/19.jpg" alt="The Panama Canal" width="140" height="79" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/20.jpg">
+			<img src="images/thumbs/20.jpg" alt="Flags over Brussels" width="133" height="99" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/21.jpg">
+			<img src="images/thumbs/21.jpg" alt="Eiffel Tower" width="100" height="134" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/22.jpg">
+			<img src="images/thumbs/22.jpg" alt="Never-ending stairs" width="99" height="133" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/23.jpg">
+			<img src="images/thumbs/23.jpg" alt="Paris, France" width="140" height="93" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/24.jpg">
+			<img src="images/thumbs/24.jpg" alt="Rainbow over Belgium" width="136" height="98" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/25.jpg">
+			<img src="images/thumbs/25.jpg" alt="Playa del Carmen" width="136" height="96" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/26.jpg">
+			<img src="images/thumbs/26.jpg" alt="Panama City, Panama" width="133" height="96" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/27.jpg">
+			<img src="images/thumbs/27.jpg" alt="Red frog" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/28.jpg">
+			<img src="images/thumbs/28.jpg" alt="Dogs on a couch" width="133" height="99" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/29.jpg">
+			<img src="images/thumbs/29.jpg" alt="Tarantula" width="133" height="97" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/30.jpg">
+			<img src="images/thumbs/30.jpg" alt="Ceviche Loco" width="140" height="93" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/31.jpg">
+			<img src="images/thumbs/31.jpg" alt="Playa Blanca, Panama" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/32.jpg">
+			<img src="images/thumbs/32.jpg" alt="Pickles" width="133" height="99" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/33.jpg">
+			<img src="images/thumbs/33.jpg" alt="Parrot" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/34.jpg">
+			<img src="images/thumbs/34.jpg" alt="Panama rains" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/35.jpg">
+			<img src="images/thumbs/35.jpg" alt="Cinta Costera, Panama City" width="120" height="120" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/36.jpg">
+			<img src="images/thumbs/36.jpg" alt="Afternoon stroll" width="133" height="100" />
+			</a>
+		</li>
+		<li>
+			<a href="images/fullsize/37.jpg">
+			<img src="images/thumbs/37.jpg" alt="Overlooking the Panama Canal" width="138" height="94" />
+			</a>
+		</li>
+	</ul>
+</div>
+
+<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/photopile.js"></script>
+<script type="text/javascript">
+$(function(){
+	PhotoPile().scatter();
+});
+</script>
+<div style="text-align:center;margin:50px 0; font:normal 24px/34px 'MicroSoft YaHei';">
+<p>质量月摄影展</p>
+</div>
+</body>
 </html>
